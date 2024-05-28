@@ -1,35 +1,21 @@
-# Components
+# Analyse du sujet :
 
-Vue template files in this folder are automatically imported.
+Nous voulons gérer un frigo.
 
-## 🚀 Usage
+## Les fonctionnalités requises sont :
 
-Importing is handled by [unplugin-vue-components](https://github.com/unplugin/unplugin-vue-components). This plugin automatically imports `.vue` files created in the `src/components` directory, and registers them as global components. This means that you can use any component in your application without having to manually import it.
+- Afficher le contenu du frigo
+- Ajouter un nouveau produit au frigo { nomproduit, qte, photo (facultative) }
+- Supprimer un produit du frigo totalement
+- Ajouter 1 à la quantité d’un produit présent dans le frigo
+- Supprimer 1 à la quantité d’un produit présent dans le frigo
+- Rechercher des produits
 
-The following example assumes a component located at `src/components/MyComponent.vue`:
+## Analyse des composants à créer :
 
-```vue
-<template>
-  <div>
-    <MyComponent />
-  </div>
-</template>
+- App.vue : Notre composant principal qui sert de conteneur pour tous les autres composants.
 
-<script lang="ts" setup>
-  //
-</script>
-```
-
-When your template is rendered, the component's import will automatically be inlined, which renders to this:
-
-```vue
-<template>
-  <div>
-    <MyComponent />
-  </div>
-</template>
-
-<script lang="ts" setup>
-  import MyComponent from '@/components/MyComponent.vue'
-</script>
-```
+- FridgeList.vue : Composant pour afficher la liste des produits du frigo.
+- AddProduct.vue : Composant pour ajouter un nouveau produit au frigo.
+- ProductItem.vue : Composant pour représenter un produit dans la liste.
+- SearchBar.vue : Composant pour rechercher des produits dans le frigo.
