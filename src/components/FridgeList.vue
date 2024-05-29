@@ -15,26 +15,27 @@
 
 <script setup>
 
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 const products = ref([]);
 const filteredProducts = ref([]);
 const searchTerm = ref('');
 
-onMounted(async () => {
+//On recupère les produits de l'api avec le bon id etudiant
+const fetchProducts = async () => {
     try {
-        //On recupère les produits de l'api avec le bon id etudiant
         const response = await fetch('https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/4/produits');
         if (!response.ok) {
             throw new Error('Erreur lors de la récupération des données');
         }
         const data = await response.json();
         products.value = data;
-        //console.log(products.value)
-        filteredProducts.value = data; // Initialisation de la liste qui va contenir les produits filtrés
+        filterProducts(); // Refiltrage des produits si besoin
     } catch (error) {
         console.error('Erreur :', error.message);
     }
-});
+}
+
+onMounted(fetchProducts);
 
 const filterProducts = () => {
     if (!searchTerm.value) {
@@ -45,5 +46,9 @@ const filterProducts = () => {
         filteredProducts.value = products.value.filter(product => product.nom.toLowerCase().includes(searchTerm.value.toLowerCase()));
     }
 }
+
+
+watch(products, filterProducts);
+
 
 </script>
