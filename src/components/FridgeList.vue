@@ -19,9 +19,11 @@ import { ref, onMounted, watch } from 'vue';
 const products = ref([]);
 const filteredProducts = ref([]);
 const searchTerm = ref('');
+let refreshKey2 = defineProps(['refreshKey']);
 
 //On recupère les produits de l'api avec le bon id etudiant
 const fetchProducts = async () => {
+    console.log('jappelle fetch product')
     try {
         const response = await fetch('https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/4/produits');
         if (!response.ok) {
@@ -48,7 +50,11 @@ const filterProducts = () => {
 }
 
 
-watch(products, filterProducts);
+// surveille les changements dans refreshKey et MAJ  liste  produits
+watch(refreshKey2, () => {
+    console.log("je passe par le rafraichissement de produits")
+    fetchProducts();
+});
 
 
 </script>

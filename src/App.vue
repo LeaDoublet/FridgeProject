@@ -5,7 +5,7 @@
         <v-row>
           <v-col>
             <h1>Mon Frigo</h1>
-            <FridgeList :refreshKey="key" />
+            <FridgeList :refreshKey="valuechange" />
             <AddProduct @productAdded="handleProductAdded" />
           </v-col>
         </v-row>
@@ -19,9 +19,10 @@ import { ref } from 'vue';
 import FridgeList from './components/FridgeList.vue';
 import AddProduct from './components/AddProduct.vue';
 
-const key = ref(0);
+const valuechange = ref(0);
 
 const handleProductAdded = () => {
-  key.value += 1; // Recharge FridgeList en changeant la clé
+  valuechange.value += 1; // Recharge FridgeList en changeant la clé
+  console.log("je passe par handleproduct adeed" + valuechange.value)
 };
 </script>

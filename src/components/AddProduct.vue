@@ -20,7 +20,7 @@ const newProduct = ref({
 });
 
 const error = ref('');
-const { emit } = defineEmits(['productAdded']);
+const emit = defineEmits(['productAdded']);
 
 
 const addProduct = async () => {
@@ -29,6 +29,7 @@ const addProduct = async () => {
         return;
     }
     error.value = ''; // Réinitialisation du message d'erreur
+
     console.log('Sending product data:', newProduct.value)
     try {
         const response = await fetch('https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/4/produits', {
@@ -43,8 +44,9 @@ const addProduct = async () => {
             console.log('Produit ajouté avec succès !');
             // On emet un événement pour indiquer que le produit a été ajouté aux autres composants
             emit('productAdded');
+            console.log('ca passe dessous le emit');
             // On réinitialise le formulaire après l'ajout réussi
-            newProduct.value = { nom: '', qte: '' };
+            newProduct.value = { nom: '', qte: '', photo: '' };
         } else {
             console.error('Erreur lors de l ajout du produit');
         }
