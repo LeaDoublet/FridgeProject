@@ -28,7 +28,7 @@ const products = ref([]);
 const filteredProducts = ref([]);
 const searchTerm = ref('');
 const currentPage = ref(1);
-const itemsPerPage = 10;
+const itemsPerPage = 5;
 const refreshKey2 = defineProps(['refreshKey']);
 
 //On recupère les produits de l'api avec le bon id etudiant
