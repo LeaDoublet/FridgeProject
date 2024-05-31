@@ -1,0 +1,4 @@
+Regarde si meme nom de produit deja present peut importe maj ou min on ajoute 1 à la quantité
+au bout d'un nombre d'item dans le frigo allaer a la page suivante
+Si produit deja présent on ajoute quantité à quantité deja présente
+idem pour suppression mais on verifie que le total pas en dessous de 0 sinon erreur

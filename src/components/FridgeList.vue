@@ -2,24 +2,34 @@
     <div>
         <h2>Liste des produits dans le frigo :</h2>
         <v-text-field v-model="searchTerm" label="Rechercher des produits" outlined @input="filterProducts" />
-        <v-list>
-            <v-list-item v-for="product in filteredProducts" :key="product.id">
-                <v-list-item-content>
-                    <v-list-item-title>{{ product.nom }}</v-list-item-title>
-                    <v-list-item-subtitle>Quantité: {{ product.qte }}</v-list-item-subtitle>
-                </v-list-item-content>
-            </v-list-item>
-        </v-list>
+        <v-table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Quantité</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="product in paginatedProducts" :key="product.id">
+                    <td>{{ product.nom }}</td>
+                    <td>{{ product.qte }}</td>
+                </tr>
+            </tbody>
+        </v-table>
+        <v-btn @click="prevPage" :disabled="currentPage === 1">Précédent</v-btn>
+        <v-btn @click="nextPage" :disabled="currentPage === totalPages">Suivant</v-btn>
+        <p>Page {{ currentPage }} sur {{ totalPages }}</p>
     </div>
 </template>
 
 <script setup>
-
-import { ref, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 const products = ref([]);
 const filteredProducts = ref([]);
 const searchTerm = ref('');
-let refreshKey2 = defineProps(['refreshKey']);
+const currentPage = ref(1);
+const itemsPerPage = 10;
+const refreshKey2 = defineProps(['refreshKey']);
 
 //On recupère les produits de l'api avec le bon id etudiant
 const fetchProducts = async () => {
@@ -49,12 +59,34 @@ const filterProducts = () => {
     }
 }
 
+// Calcul des produits à afficher pour la page actuelle
+const paginatedProducts = computed(() => {
+    const start = (currentPage.value - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    return filteredProducts.value.slice(start, end);
+});
 
-// surveille les changements dans refreshKey et MAJ  liste  produits
+// Calcul du nombre total de pages
+const totalPages = computed(() => {
+    return Math.ceil(filteredProducts.value.length / itemsPerPage);
+});
+
+const nextPage = () => {
+    if (currentPage.value < totalPages.value) {
+        currentPage.value++;
+    }
+};
+
+const prevPage = () => {
+    if (currentPage.value > 1) {
+        currentPage.value--;
+    }
+};
+
+// Surveille les changements dans refreshKey et MAJ liste produits
 watch(refreshKey2, () => {
     console.log("je passe par le rafraichissement de produits")
     fetchProducts();
 });
-
-
+watch(searchTerm, filterProducts);
 </script>

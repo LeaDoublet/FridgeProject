@@ -5,7 +5,8 @@
         <v-row>
           <v-col>
             <h1>Mon Frigo</h1>
-            <FridgeList :refreshKey="valuechange" />
+            <SearchBar @search="updateFilteredProducts" />
+            <FridgeList :refreshKey="valuechange" :filteredProducts="filteredProducts" />
             <AddProduct @productAdded="handleProductAdded" />
           </v-col>
         </v-row>
@@ -18,8 +19,14 @@
 import { ref } from 'vue';
 import FridgeList from './components/FridgeList.vue';
 import AddProduct from './components/AddProduct.vue';
-
+import SearchBar from './components/SearchBar.vue';
 const valuechange = ref(0);
+const filteredProducts = ref([]);
+
+// Fonction pour mettre à jour les produits filtrés
+const updateFilteredProducts = (searchTerm) => {
+
+};
 
 const handleProductAdded = () => {
   valuechange.value += 1; // Recharge FridgeList en changeant la clé
