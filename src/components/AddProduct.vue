@@ -4,7 +4,7 @@
         <v-form @submit.prevent="addProduct">
             <v-text-field v-model="newProduct.nom" label="Nom du produit" required></v-text-field>
             <v-text-field v-model="newProduct.qte" label="Quantité" required type="number"></v-text-field>
-            <v-btn type="submit" color="primary">Ajouter</v-btn>
+            <v-btn type="submit" color="purple">Ajouter</v-btn>
             <v-alert v-if="error" type="error">{{ error }}</v-alert>
         </v-form>
     </div>

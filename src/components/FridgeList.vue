@@ -13,6 +13,9 @@
                 <tr v-for="product in paginatedProducts" :key="product.id">
                     <td>{{ product.nom }}</td>
                     <td>{{ product.qte }}</td>
+                    <td>
+                        <v-btn @click="deleteProduct(product.id)" color="purple">Supprimer</v-btn>
+                    </td>
                 </tr>
             </tbody>
         </v-table>
@@ -66,7 +69,7 @@ const paginatedProducts = computed(() => {
     return filteredProducts.value.slice(start, end);
 });
 
-// Calcul du nombre total de pages
+// Calcul du nombre total de pages 
 const totalPages = computed(() => {
     return Math.ceil(filteredProducts.value.length / itemsPerPage);
 });
@@ -82,6 +85,21 @@ const prevPage = () => {
         currentPage.value--;
     }
 };
+
+const deleteProduct = async (productId) => {
+    console.log('on supprime le produit avec l id' + productId);
+    try {
+        const response = await fetch(`https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/4/produits/${productId}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            throw new Error('Erreur lors de la suppression du produit');
+        }
+        fetchProducts();
+    } catch (error) {
+        console.error('Erreur :', error.message);
+    }
+}
 
 // Surveille les changements dans refreshKey et MAJ liste produits
 watch(refreshKey2, () => {
