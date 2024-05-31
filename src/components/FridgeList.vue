@@ -14,7 +14,7 @@
                     <td>{{ product.nom }}</td>
                     <td>{{ product.qte }}</td>
                     <td>
-                        <v-btn @click="deleteProduct(product.id)" color="purple">Supprimer</v-btn>
+                        <v-btn @click="confirmDelete(product.id)" color="purple">Supprimer</v-btn>
                     </td>
                 </tr>
             </tbody>
@@ -86,16 +86,24 @@ const prevPage = () => {
     }
 };
 
+const confirmDelete = (productId) => {
+    if (confirm("Êtes-vous sûr de vouloir supprimer ce produit ?")) {
+        deleteProduct(productId);
+    }
+}
+
 const deleteProduct = async (productId) => {
     console.log('on supprime le produit avec l id' + productId);
     try {
         const response = await fetch(`https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/4/produits/${productId}`, {
             method: 'DELETE'
         });
-        if (!response.ok) {
+        const result = await response.json();
+        if (result.status === 1) {
+            fetchProducts();
+        } else {
             throw new Error('Erreur lors de la suppression du produit');
         }
-        fetchProducts();
     } catch (error) {
         console.error('Erreur :', error.message);
     }
