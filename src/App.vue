@@ -18,7 +18,7 @@
 import { ref } from 'vue';
 import FridgeList from './components/FridgeList.vue';
 import AddProduct from './components/AddProduct.vue';
-import SearchBar from './components/SearchBar.vue';
+
 const valuechange = ref(0);
 const filteredProducts = ref([]);
 

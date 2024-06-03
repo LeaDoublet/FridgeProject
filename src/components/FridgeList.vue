@@ -5,15 +5,21 @@
         <v-table>
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Nom</th>
                     <th>Quantité</th>
+                    <!--<th>Image</th>-->
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="product in paginatedProducts" :key="product.id">
+                    <td>{{ product.id }}</td>
                     <td>{{ product.nom }}</td>
                     <td>{{ product.qte }}</td>
+                    <!--<td><img :src="product.image" alt="Image produit" width="50" height="50"></td>-->
                     <td>
+                        <v-btn @click="openEditDialog(product)" color="pink">Modifier</v-btn>
                         <v-btn @click="confirmDelete(product.id)" color="purple">Supprimer</v-btn>
                     </td>
                 </tr>
@@ -22,21 +28,27 @@
         <v-btn @click="prevPage" :disabled="currentPage === 1">Précédent</v-btn>
         <v-btn @click="nextPage" :disabled="currentPage === totalPages">Suivant</v-btn>
         <p>Page {{ currentPage }} sur {{ totalPages }}</p>
+        <EditProductDialog :product="selectedProduct" :showDialog="editDialog" @update:showDialog="editDialog = $event"
+            @close="closeEditDialog" @save="updateProduct" />
     </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
+import EditProductDialog from './EditProductDialog.vue';
+
 const products = ref([]);
 const filteredProducts = ref([]);
 const searchTerm = ref('');
 const currentPage = ref(1);
 const itemsPerPage = 5;
 const refreshKey2 = defineProps(['refreshKey']);
+const editDialog = ref(false);
+const selectedProduct = ref({});
 
-//On recupère les produits de l'api avec le bon id etudiant
+// On récupère les produits de l'API avec le bon ID étudiant
 const fetchProducts = async () => {
-    console.log('jappelle fetch product')
+    console.log('jappelle fetch product');
     try {
         const response = await fetch('https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/4/produits');
         if (!response.ok) {
@@ -109,9 +121,40 @@ const deleteProduct = async (productId) => {
     }
 }
 
+const openEditDialog = (product) => {
+    selectedProduct.value = { ...product };
+    editDialog.value = true;
+}
+
+const closeEditDialog = () => {
+    editDialog.value = false;
+}
+
+// On appelle l'api en PUT et on lui donne le produit dans le body pour pouvoir modifier.
+const updateProduct = async (product) => {
+    try {
+        const response = await fetch(`https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/4/produits`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        });
+        const result = await response.json();
+        if (result.status === 1) {
+            fetchProducts();
+            closeEditDialog();
+        } else {
+            throw new Error('Erreur lors de la mise à jour du produit');
+        }
+    } catch (error) {
+        console.error('Erreur :', error.message);
+    }
+}
+
 // Surveille les changements dans refreshKey et MAJ liste produits
 watch(refreshKey2, () => {
-    console.log("je passe par le rafraichissement de produits")
+    console.log("je passe par le rafraichissement de produits");
     fetchProducts();
 });
 watch(searchTerm, filterProducts);
