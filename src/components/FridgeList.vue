@@ -15,6 +15,12 @@
                 <tr v-for="product in paginatedProducts" :key="product.id">
                     <td>{{ product.nom }}</td>
                     <td>{{ product.qte }}</td>
+                    <v-btn @click="addQuantity(product)" icon>
+                        <v-icon>mdi-plus</v-icon>
+                    </v-btn>
+                    <v-btn @click="removeQuantity(product)" icon>
+                        <v-icon>mdi-minus</v-icon>
+                    </v-btn>
                     <!--<td><img :src="product.image" alt="Image produit" width="50" height="50"></td>-->
                     <td>
                         <v-btn @click="openEditDialog(product)" color="pink">Modifier</v-btn>
@@ -100,7 +106,59 @@ const prevPage = () => {
         currentPage.value--;
     }
 };
+// Fonction pour ajouter 1 à la quantité d' un produit (ajout rapide )
+const addQuantity = async (product) => {
+    try {
+        // Ajoute 1 à la quantité du produit
+        product.qte += 1;
+        console.log(product)
+        // Envoie une requête POST pour mettre à jour la quantité
+        const response = await fetch(`https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/4/produits/${product.id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        });
+        const data = await response.json();
+        if (data.status === 1) {
+            console.log('Quantité ajoutée avec succès !');
+            fetchProducts(); // Rafraîchi la liste des produits
+        } else {
+            throw new Error('Erreur lors de l\'ajout de la quantité');
+        }
+    } catch (error) {
+        console.error('Erreur :', error.message);
+    }
+};
 
+// Fonction pour supprimer 1 à la quantité d' un produit (ajout rapide )
+const removeQuantity = async (product) => {
+    if (product.qte > 0) {
+        try {
+            // Ajoute 1 à la quantité du produit
+            product.qte -= 1;
+            console.log(product)
+            // Envoie une requête POST pour mettre à jour la quantité
+            const response = await fetch(`https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/4/produits/${product.id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(product.value)
+            });
+            const data = await response.json();
+            if (data.status === 1) {
+                console.log('Quantité ajoutée avec succès !');
+                fetchProducts(); // Rafraîchi la liste des produits
+            } else {
+                throw new Error('Erreur lors de l\'ajout de la quantité');
+            }
+        } catch (error) {
+            console.error('Erreur :', error.message);
+        }
+    }
+};
 const confirmDelete = (productId) => {
     if (confirm("Êtes-vous sûr de vouloir supprimer ce produit ?")) {
         deleteProduct(productId);
