@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h2>Liste des produits dans le frigo :</h2>
         <v-text-field v-model="searchTerm" label="Rechercher des produits" outlined @input="filterProducts" />
         <v-table>
             <thead>
@@ -113,8 +112,8 @@ const addQuantity = async (product) => {
         product.qte += 1;
         console.log(product)
         // Envoie une requête POST pour mettre à jour la quantité
-        const response = await fetch(`https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/4/produits/${product.id}`, {
-            method: 'POST',
+        const response = await fetch(`https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/4/produits`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -140,12 +139,12 @@ const removeQuantity = async (product) => {
             product.qte -= 1;
             console.log(product)
             // Envoie une requête POST pour mettre à jour la quantité
-            const response = await fetch(`https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/4/produits/${product.id}`, {
-                method: 'POST',
+            const response = await fetch(`https://webmmi.iut-tlse3.fr/~pecatte/frigo/public/4/produits`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(product.value)
+                body: JSON.stringify(product)
             });
             const data = await response.json();
             if (data.status === 1) {
