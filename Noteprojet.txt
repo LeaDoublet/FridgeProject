@@ -1,0 +1,15 @@
+Regarde si meme nom de produit deja present peut importe maj ou min on ajoute 1 à la quantité
+au bout d'un nombre d'item dans le frigo allaer a la page suivante --> ok
+Si produit deja présent on ajoute quantité à quantité deja présente
+ajout rapide et suppression rapide d'un a la quantité d'un produit du frigo
+idem pour suppression mais on verifie que le total pas en dessous de 0 sinon erreur
+
+Ajout fonctionnalité :
+
+- Notifications de stock bas:
+
+  Alerter l'utilisateur lorsque la quantité d'un produit est inférieure à un seuil spécifié.
+
+- Suggestions de recettes:
+
+  Utiliser les produits disponibles dans le frigo pour suggérer des recettes que l'utilisateur peut préparer.

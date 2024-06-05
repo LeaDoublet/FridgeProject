@@ -1,5 +1,10 @@
 <template>
     <div>
+        <v-alert v-if="lowStockProducts.length" type="warning" dismissible class="custom-alert">
+            <div v-for="product in lowStockProducts" :key="product.id">
+                Le produit {{ product.nom }} est presque épuisé ({{ product.qte }} restant).
+            </div>
+        </v-alert>
         <v-text-field v-model="searchTerm" label="Rechercher des produits" outlined @input="filterProducts" />
         <v-table>
             <thead>
@@ -11,10 +16,10 @@
                 </tr>
             </thead>
             <tbody>
+
                 <tr v-for="product in paginatedProducts" :key="product.id">
                     <td>{{ product.nom }}</td>
                     <td>{{ product.qte }}</td>
-
                     <v-btn @click="addQuantity(product)" icon>
                         <v-icon>mdi-plus</v-icon>
                     </v-btn>
@@ -56,6 +61,7 @@ const editDialog = ref(false);
 const infoDialog = ref(false);
 const selectedProduct = ref({});
 const selectedProductInfo = ref(null);
+const lowStockThreshold = 5; // Ajout d'un stock minimum de produit à 5
 
 // On récupère les produits de l'API avec le bon ID étudiant
 const fetchProducts = async () => {
@@ -71,8 +77,12 @@ const fetchProducts = async () => {
     } catch (error) {
         console.error('Erreur :', error.message);
     }
+
 }
 
+const lowStockProducts = computed(() => {
+    return products.value.filter(product => product.qte < lowStockThreshold);
+});
 onMounted(fetchProducts);
 
 const filterProducts = () => {
@@ -239,3 +249,10 @@ watch(refreshKey2, () => {
 });
 watch(searchTerm, filterProducts);
 </script>
+<style scoped>
+.v-alert {
+    margin-bottom: 10px;
+    height: 40px;
+    font-size: 14px;
+}
+</style>
