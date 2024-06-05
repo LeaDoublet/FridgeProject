@@ -1,14 +1,20 @@
 <template>
     <div>
-        <h2>Ajouter un nouveau produit :</h2>
+        <h4>Ajouter un nouveau produit :</h4>
         <v-form @submit.prevent="addProduct">
-            <v-text-field v-model="newProduct.nom" label="Nom du produit" required witdh="20"
-                height="20"></v-text-field>
-            <v-text-field v-model="newProduct.qte" label="Quantité" required type="number" witdh="20"
-                height="20"></v-text-field>
-            <v-text-field v-model="newProduct.photo" label="Photo" witdh="10" height="10"></v-text-field>
-            <v-btn type="submit" color="purple">Ajouter</v-btn>
-            <v-alert v-if="error" type="error">{{ error }}</v-alert>
+            <v-row>
+                <v-col cols="6">
+                    <v-text-field v-model="newProduct.nom" label="Nom du produit" required
+                        class="form-field slim-field"></v-text-field>
+                </v-col>
+                <v-col cols="6">
+                    <v-text-field v-model="newProduct.photo" label="Photo" class="form-field slim-field"></v-text-field>
+                </v-col>
+            </v-row>
+            <v-text-field v-model="newProduct.qte" label="Quantité" required type="number"
+                class="form-field slim-field"></v-text-field>
+            <v-btn type="submit" color="purple" class="form-field slim-button">Ajouter</v-btn>
+            <v-alert v-if="error" type="error" class="form-field">{{ error }}</v-alert>
         </v-form>
     </div>
 </template>
@@ -58,3 +64,15 @@ const addProduct = async () => {
     }
 }
 </script>
+
+<style scoped>
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-field {
+    width: 100%;
+    margin: auto;
+}
+</style>

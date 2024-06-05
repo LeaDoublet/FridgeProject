@@ -4,7 +4,7 @@
       <v-container fluid class="d-flex align-center justify-center text-center" style="height: 100vh;">
         <v-row>
           <v-col>
-            <h1>Mon Frigo</h1>
+            <h2>Mon Frigo</h2>
             <FridgeList :refreshKey="valuechange" :filteredProducts="filteredProducts" />
             <AddProduct @productAdded="handleProductAdded" />
           </v-col>

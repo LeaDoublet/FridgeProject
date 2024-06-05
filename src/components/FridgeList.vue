@@ -6,7 +6,6 @@
                 <tr>
                     <th>Nom</th>
                     <th>Quantité</th>
-                    <!--<th>Image</th>-->
                     <th>Actions</th>
                     <th>Images</th>
                 </tr>
@@ -25,7 +24,6 @@
                     <td>
                         <v-img :src="product.photo" alt="" witdh="20" height="20"></v-img>
                     </td>
-
                     <td>
                         <v-btn @click="openEditDialog(product)" color="pink">Modifier</v-btn>
                         <v-btn @click="confirmDelete(product.id)" color="purple">Supprimer</v-btn>
