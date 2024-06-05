@@ -2,8 +2,11 @@
     <div>
         <h2>Ajouter un nouveau produit :</h2>
         <v-form @submit.prevent="addProduct">
-            <v-text-field v-model="newProduct.nom" label="Nom du produit" required></v-text-field>
-            <v-text-field v-model="newProduct.qte" label="Quantité" required type="number"></v-text-field>
+            <v-text-field v-model="newProduct.nom" label="Nom du produit" required witdh="20"
+                height="20"></v-text-field>
+            <v-text-field v-model="newProduct.qte" label="Quantité" required type="number" witdh="20"
+                height="20"></v-text-field>
+            <v-text-field v-model="newProduct.photo" label="Photo" witdh="10" height="10"></v-text-field>
             <v-btn type="submit" color="purple">Ajouter</v-btn>
             <v-alert v-if="error" type="error">{{ error }}</v-alert>
         </v-form>

@@ -8,19 +8,24 @@
                     <th>Quantité</th>
                     <!--<th>Image</th>-->
                     <th>Actions</th>
+                    <th>Images</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="product in paginatedProducts" :key="product.id">
                     <td>{{ product.nom }}</td>
                     <td>{{ product.qte }}</td>
+
                     <v-btn @click="addQuantity(product)" icon>
                         <v-icon>mdi-plus</v-icon>
                     </v-btn>
                     <v-btn @click="removeQuantity(product)" icon>
                         <v-icon>mdi-minus</v-icon>
                     </v-btn>
-                    <!--<td><img :src="product.image" alt="Image produit" width="50" height="50"></td>-->
+                    <td>
+                        <v-img :src="product.photo" alt="" witdh="20" height="20"></v-img>
+                    </td>
+
                     <td>
                         <v-btn @click="openEditDialog(product)" color="pink">Modifier</v-btn>
                         <v-btn @click="confirmDelete(product.id)" color="purple">Supprimer</v-btn>
