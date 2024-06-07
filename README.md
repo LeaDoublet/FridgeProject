@@ -76,6 +76,21 @@ Pour ce qui est de l'ajout, suppression rapide, cela se fait aisément à l'aide
 
 ### 6. Modifier un produit :
 
+Pour modifier un produit, il vous suffit de clicker sur modifier. Une pop-up de modification va ainsi s'ouvrir vous permettant d'effectuer celle-ci.
+![screenshot](./imagesForReadMe/popupModifierProduit.png)
+
+Nous modifions ainsi la quantité de tomates avec +1 par exemple.
+
+![screenshot](./imagesForReadMe/tomateModifqttOk.png)
+
 ### 7. Visualiser le détail d'un produit :
 
+Afin de visualiser les détails d'un produit, il vous suffit de cliker sur le bouton "infos". Une pop-up va ainsi s'ouvrir nous permettant de visualiser les caractéristiques du produit tel que son id, son nom ou encore sa quantité.
+
+![screenshot](./imagesForReadMe/infosProduit.png)
+
 ### 8. Système d'alerte de stock bas :
+
+Enfin, un système d'alerte de stock bas de produits est disponible en haut de la page, pour nous permettre de faire notre liste de course par exemple en fonction du stock minimale. Pour cette version de l'application, l'alerte de stock a été créée pour les produits de moins de 5 en quantité. L'alerte nous indique également le nombre de produits restant.
+
+![screenshot](./imagesForReadMe/alerteStock.png)
