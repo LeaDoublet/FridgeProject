@@ -20,4 +20,14 @@ Nous voulons gérer un frigo.
 - ProductItem.vue : Composant pour représenter un produit dans la liste.
 - SearchBar.vue : Composant pour rechercher des produits dans le frigo.
 
+# Graphe décrivant l'architecture de mon application :
+
 ![screenshot](./imagesForReadMe/graphiqueComposants.png)
+
+# Manuel utilisateur :
+
+Le ([site de ce devoir](https://fridge-project.vercel.app)) est accessible ici.
+
+## Page principale
+
+![screenshot](./imagesForReadMe/pageprincipale.png)
