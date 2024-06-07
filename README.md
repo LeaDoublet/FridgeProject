@@ -26,8 +26,22 @@ Nous voulons gérer un frigo.
 
 # Manuel utilisateur :
 
-Le ([site de ce devoir](https://fridge-project.vercel.app)) est accessible ici.
+Le [site de ce devoir](https://fridge-project.vercel.app) est accessible ici.
 
 ## Page principale
 
+A l'arrivée sur la page principale nous avons vue sur le tableau des produits présents dans le frigo.
+
 ![screenshot](./imagesForReadMe/pageprincipale.png)
+
+### 1. Recherche d'un produit :
+
+Afin de rechercher un produit dans le tableau, il vous suffit de taper votre terme à rechercher dans la barre de recherche. En effet lors de votre écriture/modification du terme à rechercher l'application, effectue des requêtes à l'api à chaque changement permettant une recherche fluide en temps réel lors de votre saisie afin d'améliorer l'expérience utilisateur.
+
+![screenshot](./imagesForReadMe/rechercheProduit.png)
+
+### 2. Navigation dans l'affichage des produits contenus dans le frigo :
+
+Afin d'améliorer l'expérience utilisateur, une pagination du tableau a également été mise en place. Permettant ainsi de naviguer dans les éléments à l'aide de différents boutons. En prenant en compte bien sûr que l'on ne puisse pas actionner le bouton précédent en étant sur la première page et de même le bouton suivant en étant sur la dernière page. Nous pouvons également observer une actualisation du numéro de pagination.
+
+![screenshot](./imagesForReadMe/boutonsSuivantPrecedents.png)
