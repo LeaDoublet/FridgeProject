@@ -5,7 +5,7 @@
                 Le produit {{ product.nom }} est presque épuisé ({{ product.qte }} restant).
             </div>
         </v-alert>
-        <v-text-field v-model="searchTerm" label="Rechercher des produits" outlined @input="filterProducts" />
+        <SearchBar @search="filterProducts" />
         <v-table>
             <thead>
                 <tr>
@@ -50,6 +50,7 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import EditProductDialog from './EditProductDialog.vue';
 import InfosDialog from './InfoProductDialog.vue';
+import SearchBar from './SearchBar.vue';
 
 const products = ref([]);
 const filteredProducts = ref([]);
@@ -73,7 +74,7 @@ const fetchProducts = async () => {
         }
         const data = await response.json();
         products.value = data;
-        filterProducts(); // Refiltrage des produits si besoin
+        filterProducts(searchTerm.value); // Refiltrage des produits si besoin
     } catch (error) {
         console.error('Erreur :', error.message);
     }
@@ -85,7 +86,8 @@ const lowStockProducts = computed(() => {
 });
 onMounted(fetchProducts);
 
-const filterProducts = () => {
+const filterProducts = (term) => {
+    searchTerm.value = term;
     if (!searchTerm.value) {
         // Si le champ de recherche est vide, on affiche tous les produits
         filteredProducts.value = products.value;

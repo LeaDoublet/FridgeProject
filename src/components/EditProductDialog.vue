@@ -14,6 +14,9 @@
                             <v-text-field v-model="internalProduct.qte" label="Quantité" type="number" outlined
                                 required />
                         </v-col>
+                        <v-col cols="12">
+                            <v-text-field v-model="internalProduct.photo" label="Photo du produit" outlined />
+                        </v-col>
                     </v-row>
                 </v-container>
             </v-card-text>
