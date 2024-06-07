@@ -17,7 +17,8 @@ Nous voulons gérer un frigo.
 
 - FridgeList.vue : Composant pour afficher la liste des produits du frigo.
 - AddProduct.vue : Composant pour ajouter un nouveau produit au frigo.
-- ProductItem.vue : Composant pour représenter un produit dans la liste.
+- EditProductDialog.vue : Composant pour représenter sous forme de pop-up un produit dans la liste pour modification.
+- InfoProductDialog.vue : Composant pour visualiser sous forme de pop-up un produit dans la liste
 - SearchBar.vue : Composant pour rechercher des produits dans le frigo.
 
 # Graphe décrivant l'architecture de mon application :
@@ -45,3 +46,36 @@ Afin de rechercher un produit dans le tableau, il vous suffit de taper votre ter
 Afin d'améliorer l'expérience utilisateur, une pagination du tableau a également été mise en place. Permettant ainsi de naviguer dans les éléments à l'aide de différents boutons. En prenant en compte bien sûr que l'on ne puisse pas actionner le bouton précédent en étant sur la première page et de même le bouton suivant en étant sur la dernière page. Nous pouvons également observer une actualisation du numéro de pagination.
 
 ![screenshot](./imagesForReadMe/boutonsSuivantPrecedents.png)
+
+### 3. Ajouter un nouveau produit dans le frigo :
+
+Pour ajouter un nouveau produit dans le frigo, cela se passe dans le formulaire situé en bas de la page.
+
+![screenshot](./imagesForReadMe/ajoutproduit.png)
+
+Il suffit de completer les différents champs tels que le nom du produit sa quantité et le lien si il y a vers une image du produit.
+
+/!\ Il vous sera impossible d'ajouter une quantité négative, une alerte apparaitra et vous devrait entrée une valeur valide pour pouvoir ajouter le produit.
+![screenshot](./imagesForReadMe/alerteAjoutQuantite.png)
+
+Pour ce qui est de l'image, il vous suffit de copier le lien vers l'image :
+![screenshot](./imagesForReadMe/lienImageAjout.png)
+
+Vous aurez ainsi accès à l'image des produit si ils en ont :
+![screenshot](./imagesForReadMe/imageProduit.png)
+
+### 4. Supprimer un produit du frigo totalement :
+
+Pour supprimer totalement un produit du frigo, il vous suffit simplement de clicker sur supprimer. Ceci fait, une demande de confirmation de la suppresion s'affichera. Clicker sur oui pour supprimer totalement le produit du frigo.
+![screenshot](./imagesForReadMe/suppressionProduit.png)
+
+### 5. Ajouter / Supprimer 1 à la quantité d’un produit présent dans le frigo (rapidement sans modification du produit) :
+
+Pour ce qui est de l'ajout, suppression rapide, cela se fait aisément à l'aide des boutons + et - du tableau principale.
+![screenshot](./imagesForReadMe/ajoutSuppressionRapide.png)
+
+### 6. Modifier un produit :
+
+### 7. Visualiser le détail d'un produit :
+
+### 8. Système d'alerte de stock bas :
