@@ -19,3 +19,5 @@ Nous voulons gérer un frigo.
 - AddProduct.vue : Composant pour ajouter un nouveau produit au frigo.
 - ProductItem.vue : Composant pour représenter un produit dans la liste.
 - SearchBar.vue : Composant pour rechercher des produits dans le frigo.
+
+![screenshot](./imagesForReadMe/graphiqueComposants.png)
